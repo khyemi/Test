@@ -32,7 +32,7 @@
 		
 			<!-- checkboxes for skills -->
 			<div id="check_boxes_skills">
-				<h4>Choose experise:</h4>
+				<h4>Choose expertise:</h4>
 				<p>JavaScript<input type="checkbox" name="skills[]" value="JavaScript" />
 					HTML&CSS<input type="checkbox" name="skills[]" value="HTML&CSS" />
 					Python<input type="checkbox" name="skills[]" value="Python" />

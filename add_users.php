@@ -21,6 +21,9 @@ if (mysqli_query($conn, $sql)) {
     echo "Error creating database: " . mysqli_error($conn);
 }
 
+mysqli_close($conn);
+
+
 $dbname = "myDB";
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 
@@ -30,10 +33,11 @@ $sql = "CREATE TABLE IF NOT EXISTS Candidates (
 firstname VARCHAR(30),
 lastname VARCHAR(30),
 gender VARCHAR(10),
-languages VARCHAR(40),
-skills VARCHAR(40),
-comments VARCHAR(200)
+languages VARCHAR(100),
+skills VARCHAR(100),
+comments TEXT
 )";
+
 
 // Execute query
 if (mysqli_query($conn, $sql)) {
@@ -50,21 +54,25 @@ if(isset($_POST['submit'])) {
 	$skills = implode(', ', $_POST['skills']);
 	$comments = $_POST['comments'];
 
-
-	
-/**
+	// print languages 
 	foreach($_POST['languages'] as $index => $lang_val){
 		echo "languages[".$index."]=".$lang_val;
 		echo "<br>";
-		
+		}
+	// print skills 
 	foreach($_POST['skills'] as $index => $skills_val){
 		echo "skills[".$index."]=".$skills_val;
 		echo "<br>";
 		}
-**/
-	
+
 	// sql to insert data
-	$sql = "INSERT INTO Candidates (firstname, lastname, gender, languages, skills, comments) VALUES ('$firstname', '$lastname', '$gender', '$languages', '$skills', '".$comments."')";
+	$sql = "INSERT INTO Candidates (firstname, lastname, gender, languages, skills, comments)
+			VALUES ('".$firstname."' , '"
+					 .$lastname."' , '"
+					 .$gender."' , '"
+					 .$languages."' , '"
+					 .$skills."' , '"
+					 .$comments."')";
 
 	if (mysqli_query($conn, $sql)) {
 		echo "Entered Data successfully<br>";
@@ -73,13 +81,14 @@ if(isset($_POST['submit'])) {
 	}
 	echo "<br>";
 	
-	$sql = "SELECT firstname, lastname FROM MyGuests";
+	// sql to select data
+	$sql = "SELECT firstname, lastname, gender FROM Candidates";
 	$result = mysqli_query($conn, $sql);
 
 	if (mysqli_num_rows($result) > 0) {
 		// output data of each row
 		while($row = mysqli_fetch_assoc($result)) {
-			echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
+			echo "Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>Gender: " .$row["gender"]. "<br>";
 		}
 	} else {
     echo "0 results";
