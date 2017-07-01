@@ -1,6 +1,5 @@
 # Test
-
-Test:
+Hyemi Kim
 
 1.) Create a basic Web Form, with 2 Text Boxes, 1 Select Box, 2 Checkbox groups (with at least 4 options for each) and 1 Text area box.
 
